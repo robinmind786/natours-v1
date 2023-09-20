@@ -22,12 +22,17 @@ const DB = process.env.DATABASE.replace(
 // })();
 
 async function run() {
-  await mongoose.connect(
-    "mongodb+srv://robinrh656:PrFbaFod95Ql1eXT@cluster0.yroiteb.mongodb.net/natours?retryWrites=true&w=majority"
-  );
+  await mongoose
+    .connect(
+      "mongodb+srv://robinrh656:PrFbaFod95Ql1eXT@cluster0.yroiteb.mongodb.net/natours?retryWrites=true&w=majority"
+    )
+    .then(() => {
+      console.log("DB connection successfully");
+    });
 }
 
 run();
+mongoose.set("bufferCommands", false);
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
