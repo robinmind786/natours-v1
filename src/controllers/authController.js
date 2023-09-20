@@ -45,6 +45,8 @@ const login = catchAsync(async (req, res, next) => {
 
   const token = signToken(user._id);
 
+  res.append(authorization, `Bearer ${token}`);
+
   res.status(200).json({
     status: "success",
     message: "User login successfully",
