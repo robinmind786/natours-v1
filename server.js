@@ -37,8 +37,6 @@ mongoose.connect(
   "mongodb+srv://robinrh656:PrFbaFod95Ql1eXT@cluster0.yroiteb.mongodb.net/natours?retryWrites=true&w=majority"
 );
 
-mongoose.set("bufferCommands", false);
-
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
   console.log(`App running on port ${port}...`);
