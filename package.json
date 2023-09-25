@@ -9,8 +9,8 @@
     "debug": "ndb server.js",
     "bulid": "npm install",
     "helping:dev": "npm i eslint-config-prettier eslint-plugin-jsx-a11y eslint-plugin-node eslint-plugin-prettier eslint-plugin-react prettier --save-dev",
-    "data:delete": "node dev-data/data/import-dev-data.js --delete",
-    "data:import": "node dev-data/data/import-dev-data.js --import"
+    "data:delete": "node src/dev-data/data/import-dev-data.js --delete",
+    "data:import": "node src/dev-data/data/import-dev-data.js --import"
   },
   "repository": {
     "type": "git",
