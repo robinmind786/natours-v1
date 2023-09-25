@@ -10,6 +10,7 @@ const hpp = require('hpp');
 
 const tourRouter = require('./src/routes/tourRoutes');
 const userRouter = require('./src/routes/userRoutes');
+const reviewRouter = require('./src/routes/reviewRoutes');
 const AppError = require('./src/utils/appError');
 const globalErrorcontroller = require('./src/controllers/errorController');
 
@@ -48,6 +49,7 @@ app.use(
 // global route supply here
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/tours', tourRouter);
+app.use('/api/v1/reviews', reviewRouter);
 
 // global error supply here
 app.all('*', (req, res, next) => {
