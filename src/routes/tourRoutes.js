@@ -19,7 +19,7 @@ router.route('/monthly-plan/:year').get(getMonthlyPlan);
 
 router
   .route('/')
-  .get(protect, restrictTo('admin'), getAllTours)
+  .get(protect, restrictTo('admin', 'user'), getAllTours)
   .post(createTour);
 router.route('/:id').get(getTour).patch(updateTour).delete(deleteTour);
 

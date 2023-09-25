@@ -10,13 +10,11 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASSWORD,
 );
 
-mongoose
-  .connect(process.env.DATABASE_LOCAL, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  })
-  .then(() => console.log('DB connection successful!'));
+(async function () {
+  await mongoose.connect(process.env.DATABASE_LOCAL).then(() => {
+    console.log('DB Connection successfully');
+  });
+})();
 
 // READ JSON FILE
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/tours.json`, 'utf-8'));
