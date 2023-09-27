@@ -1,19 +1,7 @@
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
-const { deleteOne } = require('./handlerFactory');
-
-const getAllUsers = catchAsync(async (req, res, next) => {
-  const users = await User.find();
-
-  res.status(200).json({
-    status: 'success',
-    results: users.length,
-    data: {
-      users,
-    },
-  });
-});
+const { deleteOne, updateOne, getOne, getAll } = require('./handlerFactory');
 
 // update current user their own information without passowrd
 const filterObj = (obj, ...allowedFields) => {
@@ -59,24 +47,16 @@ const deleteMe = catchAsync(async (req, res, next) => {
   });
 });
 
-const getUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not yet defined!',
-  });
-};
 const createUser = (req, res) => {
   res.status(500).json({
     status: 'error',
-    message: 'This route is not yet defined!',
+    message: 'This route is not defined! Please use /signup instead',
   });
 };
-const updateUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not yet defined!',
-  });
-};
+
+const getAllUsers = getAll(User);
+const getUser = getOne(User);
+const updateUser = updateOne(User);
 const deleteUser = deleteOne(User);
 
 module.exports = {

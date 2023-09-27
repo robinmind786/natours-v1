@@ -1,4 +1,4 @@
-const AppError = require("../utils/appError");
+const AppError = require('../utils/appError');
 
 // invalid id error
 const handleCastErrorDB = (err) => {
@@ -18,7 +18,7 @@ const handleDuplicateFieldDB = (err) => {
 const handleValidationErrorDB = (err) => {
   const errors = Object.values(err.errors).map((el) => el.message);
 
-  const message = `Invalid input data. ${errors.join(". ")}`;
+  const message = `Invalid input data. ${errors.join('. ')}`;
   return new AppError(message, 400);
 };
 
@@ -42,12 +42,12 @@ const sendErrorProd = (err, res) => {
     });
   } else {
     // programming or other unknown error: don't leak error details (make the error a nice readable message for client/public)
-    console.error("Error 🥵", err);
+    console.error('Error 🥵', err);
 
     // send a readable/meaningfull message to client/public
     res.status(500).json({
-      status: "error",
-      message: "Something went very wrong!😴",
+      status: 'error',
+      message: 'Something went very wrong!😴',
     });
   }
 };
@@ -55,16 +55,16 @@ const sendErrorProd = (err, res) => {
 // all error supply station both development and production mode
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
-  err.status = err.status || "error";
+  err.status = err.status || 'error';
 
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV === 'development') {
     sendErrorDev(err, res);
-  } else if (process.env.NODE_ENV === "production") {
+  } else if (process.env.NODE_ENV === 'production') {
     let error = { ...err };
 
-    if (error.name === "CastError") error = handleCastErrorDB(error);
+    if (error.name === 'CastError') error = handleCastErrorDB(error);
     if (error.code === 11000) error = handleDuplicateFieldDB(error);
-    if (error.name === "ValidationError")
+    if (error.name === 'ValidationError')
       error = handleValidationErrorDB(error);
 
     sendErrorProd(error, res);
