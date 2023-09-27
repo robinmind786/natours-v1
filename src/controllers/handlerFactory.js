@@ -52,10 +52,11 @@ const createOne = (Model) =>
     });
   });
 
-const getOne = (Model) =>
+const getOne = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
-    // const tour = await Tour.findById(req.params.id);
-    const doc = await Tour.findById(req.params.id).populate('reviews');
+    let query = Model.findById(req.params.id);
+    if (popOptions) query = query.populate(popOptions);
+    const doc = await query;
 
     if (!doc) {
       new AppError(`No ${Model.modelName} found with this ID`, 404);
